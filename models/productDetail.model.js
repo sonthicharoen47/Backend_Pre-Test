@@ -15,16 +15,24 @@ const ProductDetail = sequelize.define(
       allowNull: false,
     },
     productDetail_status: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
     },
     productDetail_date: {
       type: DataTypes.DATE,
       allowNull: false,
+      validate: {
+        isDate: true,
+      },
     },
   },
   {
     tableName: "productDetail",
+    timestamps: false,
   }
 );
 

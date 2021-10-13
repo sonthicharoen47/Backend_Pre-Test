@@ -14,10 +14,15 @@ const OrderDetail = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1,
+      validate: {
+        isInt: true,
+        min: 1,
+      },
     },
   },
   {
     tableName: "orderDetail",
+    timestamps: false,
   }
 );
 

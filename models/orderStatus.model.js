@@ -13,10 +13,14 @@ const OrderStatus = sequelize.define(
     orderStatus_date: {
       type: DataTypes.DATE,
       allowNull: false,
+      validate: {
+        isDate: true,
+      },
     },
   },
   {
     tableName: "orderStatus",
+    timestamps: false,
   }
 );
 

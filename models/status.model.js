@@ -11,12 +11,17 @@ const Status = sequelize.define(
       allowNull: false,
     },
     status_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
     },
   },
   {
     tableName: "status",
+    timestamps: false,
   }
 );
 

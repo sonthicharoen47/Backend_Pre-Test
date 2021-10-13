@@ -11,15 +11,18 @@ const AccountRole = sequelize.define(
       allowNull: false,
     },
     accountRole_status: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
     },
   },
   {
     tableName: "accountRole",
+    timestamps: false,
   }
 );
-
-
 
 module.exports = AccountRole;

@@ -11,8 +11,11 @@ const Product = sequelize.define(
       allowNull: false,
     },
     product_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        max: 50,
+      },
     },
     product_description: {
       type: DataTypes.TEXT,
@@ -20,6 +23,7 @@ const Product = sequelize.define(
   },
   {
     tableName: "product",
+    timestamps: false,
   }
 );
 

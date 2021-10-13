@@ -11,16 +11,29 @@ const Account = sequelize.define(
       allowNull: false,
     },
     account_fname: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
     },
     account_lname: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        isEmail: true,
+        max: 50,
+      },
+      unique: true,
     },
     hashPassword: {
       type: DataTypes.TEXT,
@@ -29,6 +42,7 @@ const Account = sequelize.define(
   },
   {
     tableName: "account",
+    timestamps: false,
   }
 );
 

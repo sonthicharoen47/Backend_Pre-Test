@@ -11,12 +11,17 @@ const Role = sequelize.define(
       allowNull: false,
     },
     role_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
     },
   },
   {
     tableName: "role",
+    timestamps: false,
   }
 );
 
