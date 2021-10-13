@@ -4,7 +4,7 @@ require("../models/index");
 
 const SyncModel = async () => {
   await sequelize
-    .sync({ force: true, logging: false })
+    .sync({ alter: true, logging: false })
     .then(() => {
       console.log(`sync model successful!`);
     })
