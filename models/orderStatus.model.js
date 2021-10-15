@@ -17,6 +17,14 @@ const OrderStatus = sequelize.define(
         isDate: true,
       },
     },
+    orderStatus_status: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      validate: {
+        is: ["^[a-z]+$", "i"],
+        max: 50,
+      },
+    },
   },
   {
     tableName: "orderStatus",

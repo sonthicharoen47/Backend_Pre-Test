@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const session = require("express-session");
+const session = require("cookie-session");
 
 require("dotenv").config();
 require("./config/passport")(passport);
@@ -9,7 +9,7 @@ require("./config/passport")(passport);
 const { testDatabaseConnection } = require("./config/dbConfig");
 const SyncModel = require("./config/dbSyncModel");
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 

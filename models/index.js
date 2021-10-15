@@ -1,5 +1,5 @@
 const Account = require("./account.model");
-const AccountRole = require("./accounRole.model");
+// const AccountRole = require("./accounRole.model");
 const Order = require("./order.model");
 const OrderDetail = require("./orderDetail.model");
 const OrderStatus = require("./orderStatus.model");
@@ -12,11 +12,15 @@ const Status = require("./status.model");
 //belongsTo // fk_? is here
 
 //account role accountRole
-Account.hasOne(AccountRole, { foreignKey: "fk_account" });
-AccountRole.belongsTo(Account, { foreignKey: "fk_account" });
+// Account.hasOne(AccountRole, { foreignKey: "fk_account" });
+// AccountRole.belongsTo(Account, { foreignKey: "fk_account" });
 
-Role.hasMany(AccountRole, { foreignKey: "fk_role" });
-AccountRole.belongsTo(Role, { foreignKey: "fk_role" });
+// Role.hasMany(AccountRole, { foreignKey: "fk_role" });
+// AccountRole.belongsTo(Role, { foreignKey: "fk_role" });
+
+//account role
+Role.hasMany(Account, { foreignKey: "fk_role" });
+Account.belongsTo(Role, { foreignKey: "fk_role" });
 
 //product productDetail
 Product.hasMany(ProductDetail, { foreignKey: "fk_product" });
@@ -37,10 +41,13 @@ OrderStatus.belongsTo(Status, { foreignKey: "fk_status" });
 ProductDetail.hasMany(OrderDetail, { foreignKey: "fk_productDetail" });
 OrderDetail.belongsTo(ProductDetail, { foreignKey: "fk_productDetail" });
 
+//account order
+Account.hasMany(Order, { foreignKey: "fk_account" });
+Order.belongsTo(Account, { foreignKey: "fk_account" });
 
 module.exports = {
   Account,
-  AccountRole,
+  // AccountRole,
   Order,
   OrderDetail,
   OrderStatus,

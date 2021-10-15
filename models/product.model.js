@@ -16,6 +16,7 @@ const Product = sequelize.define(
       validate: {
         max: 50,
       },
+      unique: true,
     },
     product_description: {
       type: DataTypes.TEXT,

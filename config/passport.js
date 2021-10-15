@@ -1,6 +1,8 @@
 const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { Account } = require("../models/index");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
 
 module.exports = (passport) => {
   passport.use(
@@ -8,32 +10,29 @@ module.exports = (passport) => {
       { usernameField: "email", passwordField: "hashPassword" },
       async (email, hashPassword, done) => {
         if (email && hashPassword) {
-          Account.findOne({
+          let user = await Account.findOne({
             where: {
               email: email,
             },
-          })
-            .then((user) => {
-              if (!user) {
-                return done(null, false, { message: "no such user found" });
-              } else {
-                let validatePassword = bcrypt.compareSync(
-                  hashPassword,
-                  user.hashPassword
-                );
-                if (!validatePassword) {
-                  return done(null, false, {
-                    message: "password did not match",
-                  });
-                } else {
-                  return done(null, user);
-                }
-              }
-            })
-            .catch((err) => {
-              console.log(`logged in error : ${err}`);
-              return done(err);
-            });
+          }).catch((err) => {
+            console.log(`logged in error : ${err}`);
+            return done(err);
+          });
+          if (!user) {
+            return done(null, false, { message: "no such user found" });
+          } else {
+            let validatePassword = bcrypt.compareSync(
+              hashPassword,
+              user.hashPassword
+            );
+            if (!validatePassword) {
+              return done(null, false, {
+                message: "password did not match",
+              });
+            } else {
+              return done(null, user);
+            }
+          }
         } else {
           console.log("email or password are empty!");
           return done(null, false, { message: "email or password are empty!" });
@@ -48,9 +47,14 @@ module.exports = (passport) => {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.SECRET_KEY,
       },
-      (jwtPayload, done) => {
+      async (jwtPayload, done) => {
         try {
-          let user = Account.findOne({ where: { id_account: jwtPayload.id } });
+          let user = await Account.findOne({
+            where: {
+              email: jwtPayload.sub,
+            },
+            attributes: { exclude: ["hashPassword"] },
+          });
           if (user) {
             return done(null, user);
           } else {
@@ -70,8 +74,12 @@ module.exports = (passport) => {
 
   passport.deserializeUser(async function (user, done) {
     console.log("deserializeUser");
-    await Account.findByPk(user.account_id)
-      .then((user) => done(null, user))
+    await Account.findByPk(user.account_id, {
+      attributes: { exclude: ["hashPassword"] },
+    })
+      .then((user) => {
+        done(null, user);
+      })
       .catch((err) => done(err, null));
   });
 };

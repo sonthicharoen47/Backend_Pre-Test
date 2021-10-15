@@ -17,6 +17,7 @@ const Role = sequelize.define(
         is: ["^[a-z]+$", "i"],
         max: 50,
       },
+      unique: true,
     },
   },
   {

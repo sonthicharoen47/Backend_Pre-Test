@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  pretest_backend:
+    container_name: pretest_backend
+    image: node_pretest
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      SECRET_KEY: fa294525d35d4949aa1897826a40390511300d856aed466f1deb49ef52bfd4f1
+      SESSION_KEY: 9887e167ea99401cbcef5003d0b6fe9ddc2c07ec1fd69e40f213c1304b3f1c55
+      DATABASE_CONNECT: "postgres://postgres:Pg.8086.@pretest_db:5432/centrillionShop"
+    depends_on:
+      - pretest_db
+    volumes:
+      - ./:/app
+  pretest_db:
+    container_name: pretest_db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Pg.8086.
+      POSTGRES_DB: centrillionShop
