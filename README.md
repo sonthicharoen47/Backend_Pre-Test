@@ -11,8 +11,10 @@ cancel-by-admin -> cancelByAdmin
 # Api
 localhost:3000/register
 ```json
-Here goes your json object definition
-```
+{
+    "email": "tony@mail.com",
+    "hashPassword": "12345678"
+}```
 
 
 localhost:3000/login
