@@ -8,9 +8,6 @@ const {
   Status,
   ProductDetail,
   Product,
-  Order,
-  OrderDetail,
-  OrderStatus,
 } = require("../models/index");
 
 const SyncModel = async () => {

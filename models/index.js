@@ -1,5 +1,4 @@
 const Account = require("./account.model");
-// const AccountRole = require("./accounRole.model");
 const Order = require("./order.model");
 const OrderDetail = require("./orderDetail.model");
 const OrderStatus = require("./orderStatus.model");
@@ -10,13 +9,6 @@ const Status = require("./status.model");
 
 //hasone
 //belongsTo // fk_? is here
-
-//account role accountRole
-// Account.hasOne(AccountRole, { foreignKey: "fk_account" });
-// AccountRole.belongsTo(Account, { foreignKey: "fk_account" });
-
-// Role.hasMany(AccountRole, { foreignKey: "fk_role" });
-// AccountRole.belongsTo(Role, { foreignKey: "fk_role" });
 
 //account role
 Role.hasMany(Account, { foreignKey: "fk_role" });
@@ -47,7 +39,6 @@ Order.belongsTo(Account, { foreignKey: "fk_account" });
 
 module.exports = {
   Account,
-  // AccountRole,
   Order,
   OrderDetail,
   OrderStatus,

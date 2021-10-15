@@ -228,7 +228,7 @@ OrderRoute.put(
 
     //get orderid from customer
     let orderId = req.body.order_id;
-    if (typeof orderId == "number") {
+    if (typeof orderId == "number" && orderId) {
       let validateOrder = await Order.findOne({
         where: {
           fk_account: req.user.account_id,
@@ -328,7 +328,7 @@ OrderRoute.put(
     let statusId = req.body.status_id;
 
     //check, verify type body
-    if (typeof orderId == "number" && typeof statusId == "number") {
+    if (typeof orderId == "number" && typeof statusId == "number" && orderId && statusId) {
       //find status
       let verifyStatus = await Status.findOne({
         where: {
