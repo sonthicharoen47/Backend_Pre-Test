@@ -9,12 +9,13 @@ cancel-by-admin -> cancelByAdmin
 ]
 
 ```json
-    "Status" = [
-pending -> pending,
-in-progress -> inProgress,
-cancel-by-customer -> cancelByCustomer,
-done -> done,
-cancel-by-admin -> cancelByAdmin
+    "Status" : {
+        "pending" :"pending",
+"in-progress" : "inProgress",
+"cancel-by-customer" : "cancelByCustomer",
+"done" : "done",
+"cancel-by-admin" : "cancelByAdmin"
+}
 ]
 ```
 
