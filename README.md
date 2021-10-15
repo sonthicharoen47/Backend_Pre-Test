@@ -1,22 +1,20 @@
 # Backend_Pre-Test
 
-Order status = [
-pending -> pending,
-in-progress -> inProgress,
-cancel-by-customer -> cancelByCustomer,
-done -> done,
-cancel-by-admin -> cancelByAdmin
-]
-
+# Status
 ```json
     "Status" : {
         "pending" :"pending",
-"in-progress" : "inProgress",
-"cancel-by-customer" : "cancelByCustomer",
-"done" : "done",
-"cancel-by-admin" : "cancelByAdmin"
-}
-]
+        "in-progress" : "inProgress",
+        "cancel-by-customer" : "cancelByCustomer",
+        "done" : "done",
+        "cancel-by-admin" : "cancelByAdmin"
+        }
+```
+
+admin account
+```json
+    "email": "admin@mail.com",
+    "hashPassword": "12345678"
 ```
 
 # Api
