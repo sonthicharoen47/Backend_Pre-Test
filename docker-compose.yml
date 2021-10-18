@@ -3,9 +3,8 @@ version: "3.4"
 services:
   pretest_backend:
     container_name: pretest_backend
-    image: node_pretest
-    build:
-      context: .
+    image: node_pretest:latest
+    build: ./
     ports:
       - 3000:3000
     environment:
@@ -16,7 +15,6 @@ services:
       - pretest_db
     volumes:
       - ./:/app
-      - /app/node_modules
 
   pretest_db:
     container_name: pretest_db
