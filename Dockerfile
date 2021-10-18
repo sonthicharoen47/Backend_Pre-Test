@@ -1,6 +1,8 @@
 FROM node:14
 
-WORKDIR /app
+WORKDIR /src
+
+RUN npm install i npm@latest -g
 
 COPY package.json ./
 
@@ -10,4 +12,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
