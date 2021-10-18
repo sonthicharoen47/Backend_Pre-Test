@@ -15,6 +15,7 @@ services:
       - pretest_db
     volumes:
       - ./:/app
+      - /app/node_modules
 
   pretest_db:
     container_name: pretest_db
